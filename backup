@@ -23,6 +23,7 @@ perform_backup() {
 inotifywait -m -r -e create,modify,delete "$LOCAL_REPO" | while read -r directory events filename; do
    
     log_message "Change detected: $events $directory$filename"
-       perform_backup
-       exit;
+   # if id -nG "$USER" | grep -qw "$GROUPS";then   
+    perform_backup
+   # fi
 done
