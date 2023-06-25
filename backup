@@ -13,7 +13,7 @@ log_message() {
 # Function to perform backup
 perform_backup() {
     # Sync local repository with GitHub repository
-    ./srv/samba/ezz_201911352/githubs.sh
+    source githubs
 echo "the files have been uploded to github "
 
 
