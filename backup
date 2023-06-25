@@ -33,7 +33,9 @@ log_message "Backup script started."
 inotifywait -m -r -e create,modify,delete "$LOCAL_REPO" | while read -r directory events filename; do
    
     log_message "Change detected: $events $directory$filename"
-        perform_backup
+       perform_backup
+       break;
+
     
 
 done
