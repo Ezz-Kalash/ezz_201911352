@@ -2,7 +2,6 @@
 
 # Variables
 LOCAL_REPO="/srv/samba/ezz_201911352"  # Path to local shared repository
-GITHUB_REPO="https://github.com/your-username/your-repo.git"  # URL of GitHub repository
 LOG_FILE="/var/log/samba_backup.log"  # Path to log file
 
 # Function to log messages with timestamp
@@ -12,9 +11,8 @@ log_message() {
 
 # Function to perform backup
 perform_backup() {
-    # Sync local repository with GitHub repository
     source githubs
-echo "the files have been uploded to github "
+	echo "the files have been uploded to github "
 
 
     # Check backup status and log the result
@@ -34,8 +32,7 @@ log_message "Backup script started."
 # Watch for file system events and trigger backup on changes
 inotifywait -m -r -e create,modify,delete "$LOCAL_REPO" | while read -r directory events filename; do
     # Check if the user belongs to the "samba" group
-    if id -nG "$USER" | grep -qw "samba"; then
         log_message "Change detected: $events $directory$filename"
         perform_backup
-    fi
+
 done
