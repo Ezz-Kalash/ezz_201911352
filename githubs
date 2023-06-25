@@ -1,0 +1,11 @@
+
+git init
+git add .
+git config --global user.name "Ezz-Kalash"
+git config --global user.email "ezzasd10@gmail.com"
+git branch -M main
+git commit -m "push"
+git remote add origin "https://github.com/Ezz-Kalash/ezz_201911352.git"
+git push -u origin main
+
+
