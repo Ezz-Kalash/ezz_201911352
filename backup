@@ -31,8 +31,9 @@ log_message "Backup script started."
 
 # Watch for file system events and trigger backup on changes
 inotifywait -m -r -e create,modify,delete "$LOCAL_REPO" | while read -r directory events filename; do
-    # Check if the user belongs to the "samba" group
-        log_message "Change detected: $events $directory$filename"
+   
+    log_message "Change detected: $events $directory$filename"
         perform_backup
+    
 
 done
