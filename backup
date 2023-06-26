@@ -1,25 +1,22 @@
 #!/bin/bash
 
-REPO="/srv/samba/ezz_201911352"
-LOG="/var/log/samba_backup.log"  
 
 mm() {
-    echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$LOG"
+    echo "$('%Y-%m-%d %H:%M:%S') $1" >> "/var/log/samba_backup.log"
 }
 
 backup() {
-    source githubs
+   source githubs
 	echo "the files have been uploded to github "
 
-
-    if [ $? -eq 0 ]; then
-        mm "Backup successfully completed."
-    else
-        mm "Backup failed."
-    fi
+   if [ $? -eq 0 ]; then
+        mm "Backup done"
+   else
+        mm "Backup fail."
+   fi
 }
 
-inotifywait -m -r -e create,modify,delete "$REPO" | while read -r directory events filename; do
+inotifywait -m -r -e create,modify,delete "/srv/samba/ezz_201911352" | while read -r directory events filename; do
    
     mm "Change detected:$filename"
    # if id -nG "$USER" | grep -qw "$GROUPS";then   
