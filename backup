@@ -1,29 +1,28 @@
 #!/bin/bash
 
-LOCAL_REPO="/srv/samba/ezz_201911352"
-LOG_FILE="/var/log/samba_backup.log"  
+REPO="/srv/samba/ezz_201911352"
+LOG="/var/log/samba_backup.log"  
 
-log_message() {
-    echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$LOG_FILE"
+mm() {
+    echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$LOG"
 }
 
-perform_backup() {
+backup() {
     source githubs
 	echo "the files have been uploded to github "
 
 
     if [ $? -eq 0 ]; then
-        log_message "Backup successfully completed."
+        mm "Backup successfully completed."
     else
-        log_message "Backup failed."
+        mm "Backup failed."
     fi
 }
 
-# Watch for file system events and trigger backup on changes
-inotifywait -m -r -e create,modify,delete "$LOCAL_REPO" | while read -r directory events filename; do
+inotifywait -m -r -e create,modify,delete "$REPO" | while read -r directory events filename; do
    
-    log_message "Change detected: $events $directory$filename"
+    mm "Change detected: $events $directory$filename"
    # if id -nG "$USER" | grep -qw "$GROUPS";then   
-    perform_backup
+    backup
    # fi
 done
