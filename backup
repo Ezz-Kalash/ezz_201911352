@@ -21,7 +21,7 @@ backup() {
 
 inotifywait -m -r -e create,modify,delete "$REPO" | while read -r directory events filename; do
    
-    mm "Change detected: $events $directory$filename"
+    mm "Change detected:$filename"
    # if id -nG "$USER" | grep -qw "$GROUPS";then   
     backup
    # fi
